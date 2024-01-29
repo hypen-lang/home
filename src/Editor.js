@@ -3,6 +3,8 @@ import Editor, {useMonaco} from '@monaco-editor/react';
 import {useEffect, useState} from "react";
 import {parseHypen, renderHypen, renderHypenElement} from "@hypen-lang/hypen-render-web";
 import * as monaco from 'monaco-editor';
+import {tokensProvider} from "./editor/tokenizationRules";
+import {languageConfiguration} from "./editor/languageConfig";
 
 function CodeEditor() {
 
@@ -27,6 +29,26 @@ function CodeEditor() {
         }.backgroundColor("#161616").width(50).height(50)
     }`
     let [text, setTxt] = useState(txt)
+
+    function editorMount(monaco){
+        monaco.languages.register({ id: 'hypen' });
+        monaco.languages.setMonarchTokensProvider('hypen', tokensProvider);
+        monaco.languages.setLanguageConfiguration('hypen', languageConfiguration);
+        monaco.editor.defineTheme('hypen', {
+            base: 'vs-dark',
+            inherit: true,
+            rules: [
+                { token: 'module-keyword', foreground: 'FFA7E1' },
+                { token: 'component-keyword', foreground: 'FFA7E1' },
+                { token: 'pre-bracket', foreground: 'FFA7E1' },
+                { token: `applicator`, foreground: 'FFECA7' },
+                { token: 'comment', foreground: '888888' }, // Example: grey color for comments
+            ],
+            colors: {
+                'editor.foreground': '#F8F8F8',
+            }
+        });
+    }
     useEffect(() => {
         parseAndRender(txt, document.getElementById("hypenapp"))
         let el = document.getElementById("hypenapp")
@@ -56,8 +78,10 @@ function CodeEditor() {
   return (
     <div className="editor">
       <Editor height="50vh" width="40vw"
-        defaultLanguage="css" theme="vs-dark"
+
+        defaultLanguage="hypen" theme="hypen"
         onChange={handleEditorChange}
+        beforeMount={editorMount}
         defaultValue={txt}
               options={{
                   minimap: { enabled: false },
