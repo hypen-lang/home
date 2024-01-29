@@ -9,7 +9,7 @@ import {languageConfiguration} from "./editor/languageConfig";
 function CodeEditor() {
 
     let [element, setElement] = useState(null)
-    let txt = `module Component(arg){
+    let txt = `module MyScreen(arg){
         // A module is a collection of components with a common state
         Column {
             // Applicators are used to apply styles to components
