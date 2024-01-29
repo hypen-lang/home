@@ -77,7 +77,7 @@ function CodeEditor() {
   }
   return (
     <div className="editor">
-      <Editor height="50vh" width="40vw"
+      <Editor height="50vh" width="60vw"
 
         defaultLanguage="hypen" theme="hypen"
         onChange={handleEditorChange}

@@ -1,4 +1,5 @@
 import logo from './logo.svg';
+import roadmap from './roadmap.svg';
 import './App.css';
 import Marquee from "react-fast-marquee";
 import CodeEditor from "./Editor";
@@ -18,8 +19,10 @@ function App() {
       <main>
         <CodeEditor></CodeEditor>
           <Line></Line>
-
       </main>
+        <footer>
+            <img src={roadmap} className="App-roadmap" alt="logo" />
+        </footer>
     </div>
   );
 }

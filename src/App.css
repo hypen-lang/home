@@ -12,6 +12,14 @@
     pointer-events: none;
 }
 
+.App-roadmap {
+    padding-top: 5vmax;
+    height: 22vmax;
+    pointer-events: none;
+    padding-bottom: 10vmax;
+}
+
+
 .App-header {
     display: flex;
     padding-top: 4vh;

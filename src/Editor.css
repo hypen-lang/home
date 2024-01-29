@@ -1,5 +1,6 @@
 .editor {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     border-radius: 12pt;
     margin-left: 20vw;
@@ -16,3 +17,21 @@
     height: 100%;
     border: none;
 }
+
+@media screen and (max-width: 600px) {
+    .editor {
+        max-height: 80vh;
+        flex-direction: column;
+    }
+    .editor > :last-child {
+        overflow: scroll;
+    }
+    .editor > * {
+        background-color: red;
+        max-width: 100%;
+        width: 100%;
+        height: 50%;
+        border: none;
+    }
+}
+
