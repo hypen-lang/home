@@ -1,7 +1,7 @@
 import './Editor.css';
 import Editor, {useMonaco} from '@monaco-editor/react';
 import {useEffect, useState} from "react";
-import {parseHypen, renderHypen, renderHypenElement} from "@hypen-lang/hypen-render-web";
+import {parseHypen, renderHypen} from "@hypen-lang/hypen-render-web";
 import * as monaco from 'monaco-editor';
 import {tokensProvider} from "./editor/tokenizationRules";
 import {languageConfiguration} from "./editor/languageConfig";
@@ -66,7 +66,7 @@ function CodeEditor() {
             let el = document.getElementById("hypenapp")
             parseHypen(input, (data)=>{
           console.log("Got data", data)
-          renderHypenElement(data.output, el)
+          renderHypen(data.output, el)
       }, (error) => {
           console.log("Got error", error)
       })
