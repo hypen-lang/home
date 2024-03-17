@@ -102,7 +102,6 @@ function CodeEditor() {
         <div style={{height: "100%", width: "100%", background: "#121212"}}>
         <div id="hypenapp"></div>
         </div>
-
     </div>
   );
 }
