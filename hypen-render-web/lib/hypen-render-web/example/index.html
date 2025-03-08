@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Example Page</title>
+	<link
+			rel="stylesheet"
+			data-name="vs/editor/editor.main"
+			href="./monaco/min/vs/editor/editor.main.css"
+	/>
+	<style>
+		.container {
+			display: flex;
+			width: 100%;
+			height: 100vh;
+		}
+		.monaco-editor, #app {
+			flex: 1;
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+<script src="../dist/bundle.js" type="module"></script>
+<div class="container">
+	<div class="monaco-editor"></div>
+	<div id="hypenapp" >Your content will be rendered here.</div>
+</div>
+
+
+<!-- Include your JavaScript file here -->
+<script src="monaco/min/vs/loader.js"></script>
+<script>
+	require.config({ paths: { 'vs': './monaco/min/vs' }});
+	require(['vs/editor/editor.main'], function() {
+		var text = `module Component("Test"){
+  Column {
+    Text("Hello World").color("red")
+    Row {
+      Text("Nope").color("orange")
+      Text("Right").color("red")
+	  canvas {
+        rect(20,20,500,500){
+          rect(20,20,50,50).color(blue)
+        }.color(red)
+      }
+      }
+  }.backgroundColor("#121212").width(100vw).height(100vh)
+}
+`
+
+		let editor = monaco.editor.create(document.querySelector('.monaco-editor'), {
+			value: text,
+			language: 'css',
+			automaticLayout: true,
+			lineNumbers: "off",
+			roundedSelection: false,
+			scrollBeyondLastLine: false,
+			readOnly: false,
+			theme: "vs-dark",
+		});
+
+		editor.onDidChangeModelContent(function() {
+			let currentContent = editor.getValue();
+			document.dispatchEvent(new CustomEvent('MonacoUpdated', { detail: { currentContent } }));
+
+		});
+	});
+</script>
+
+<script src="example.js" type="module"></script>
+</body>
+</html>
